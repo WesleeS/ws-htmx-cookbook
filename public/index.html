@@ -3,12 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- HTMX Imports -->
-    <script src="https://unpkg.com/htmx.org@1.9.11"></script>
 
-    <!-- update the version number as needed -->
+    <script src="https://unpkg.com/htmx.org@1.9.11"></script>
     <script defer src="/__/firebase/10.11.0/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
+
     <script defer src="/__/firebase/10.11.0/firebase-auth-compat.js"></script>
     <script defer src="/__/firebase/10.11.0/firebase-database-compat.js"></script>
     <script defer src="/__/firebase/10.11.0/firebase-firestore-compat.js"></script>
@@ -19,14 +17,17 @@
     <script defer src="/__/firebase/10.11.0/firebase-remote-config-compat.js"></script>
     <script defer src="/__/firebase/10.11.0/firebase-performance-compat.js"></script>
     <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
+      I found a nice boilerplate of all these imports, and though I don't use 
+      most of these it's nice just having it on there
     -->
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
     <script>import { getAuth, signInAnonymously } from "firebase/auth";</script>
 
     
     <title>Recipe Search</title>
+    <!-- fun fact, i think we can't just load in style via htmx? I think it needs
+    more care than it gets from just a get request, maybe a second load of browser
+    resources. Anyhow, this is the animation used only by searchName.html-->
     <style>
       @keyframes fadeIn {
           0% {
@@ -50,17 +51,16 @@
   margin-left: 40px; margin-right: 40px; width: calc(100% - 80px); max-height: 500px">
     
     <div class="recipeList" id="left-pane" style="border: #039be5 2px solid; height: 500px;">
-
-      <div style="width: 400px"></div>
-
+      <div style="width: 400px"></div> <!-- This is replaced by the search tabs, but it's here for whitespace on load-->
     </div>
 
 
 
     <div id="recipePane" style="border: #039be5 2px solid; height: 500px; flex: 1">
       <div id="recipe-instructions" style="height: 100%; overflow-y: auto;"> <p style="margin: 2em">No Recipe Selected...<br> Remember to scroll!</p></div>
-    </div>
-
+    </div> <!-- thanks to being a SPA, the same recipe is shown on the right! -->
+            <!-- If i wanted to spend more time on this, I'd have a get request in the url -->
+            <!-- so you could have proper pagination between viewed recipes via back & forward -->
     
 </body>
 </html>
